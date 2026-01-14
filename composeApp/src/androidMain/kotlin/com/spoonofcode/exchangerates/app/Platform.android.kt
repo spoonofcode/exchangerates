@@ -1,4 +1,4 @@
-package com.spoonofcode.exchangerates
+package com.spoonofcode.exchangerates.app
 
 import android.os.Build
 
