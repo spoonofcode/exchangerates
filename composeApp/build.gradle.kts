@@ -62,7 +62,10 @@ kotlin {
             implementation(libs.voyager.transitions)
         }
         commonTest.dependencies {
+            implementation(libs.koin.test)
+            implementation(libs.kotlinx.coroutines.test)
             implementation(libs.kotlin.test)
+            implementation(libs.turbine)
         }
     }
 }

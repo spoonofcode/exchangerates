@@ -17,6 +17,7 @@ import com.spoonofcode.exchangerates.core.ui.compose.Texts
 import com.spoonofcode.exchangerates.core.ui.ext.koinViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.model.RateMidWithDateUi
 import com.spoonofcode.exchangerates.resources.Res
+import com.spoonofcode.exchangerates.resources.exchange_rate
 import com.spoonofcode.exchangerates.resources.exchange_rates
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -27,7 +28,7 @@ internal class ExchangeRateDetailsScreen(
 ) :
     BaseScreen<ExchangeRateDetailsViewModel, ExchangeRateDetailsViewState, ExchangeRateDetailsViewAction>() {
 
-    override fun provideTopAppBarTitle() = Res.string.exchange_rates
+    override fun provideTopAppBarTitle() = Res.string.exchange_rate
 
     override fun provideInitAction(onAction: (ExchangeRateDetailsViewAction) -> Unit): () -> Unit =
         {

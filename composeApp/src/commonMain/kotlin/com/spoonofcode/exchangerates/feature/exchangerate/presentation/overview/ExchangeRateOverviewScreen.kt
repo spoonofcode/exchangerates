@@ -24,7 +24,7 @@ import com.spoonofcode.exchangerates.resources.Res
 import com.spoonofcode.exchangerates.resources.exchange_rates
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-internal class ExchnageRateOverviewScreen(
+internal class ExchangeRateOverviewScreen(
     override val verticalScrollEnable: Boolean = false,
     override val backNavigationEnable: Boolean = false,
 ) : BaseScreen<ExchangeRateOverviewViewModel, ExchangeRateOverviewViewState, ExchangeRateOverviewViewAction>() {
@@ -93,7 +93,7 @@ internal class ExchnageRateOverviewScreen(
 @Preview
 @Composable
 private fun ExchangeRateDetailsScreenContentPreview() {
-    ExchnageRateOverviewScreen().PreviewContent(
+    ExchangeRateOverviewScreen().PreviewContent(
         ExchangeRateOverviewViewState()
     )
 }
