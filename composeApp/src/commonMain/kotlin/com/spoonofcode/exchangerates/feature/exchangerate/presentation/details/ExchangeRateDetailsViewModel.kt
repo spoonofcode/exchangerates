@@ -2,35 +2,30 @@ package com.spoonofcode.exchangerates.feature.exchangerate.presentation.details
 
 import androidx.lifecycle.viewModelScope
 import com.spoonofcode.exchangerates.core.ui.base.BaseViewModel
-import com.spoonofcode.exchangerates.core.ui.base.ScreenState
-import com.spoonofcode.exchangerates.feature.exchangerate.domain.usecase.GetAllExchangeRatesUseCase
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewAction
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewState
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.usecase.GetExchangeRateUseCase
 import kotlinx.coroutines.launch
 
 internal class ExchangeRateDetailsViewModel(
-    private val getAllExchangeRatesUseCase: GetAllExchangeRatesUseCase,
-) : BaseViewModel<ExchangeRateOverviewViewState, ExchangeRateOverviewViewAction>(
-    initialViewState = ExchangeRateOverviewViewState(),
-    initialScreenState = ScreenState.CONTENT,
+    private val getExchangeRateUseCase: GetExchangeRateUseCase,
+) : BaseViewModel<ExchangeRateDetailsViewState, ExchangeRateDetailsViewAction>(
+    initialViewState = ExchangeRateDetailsViewState(),
 ) {
 
-    override fun onAction(action: ExchangeRateOverviewViewAction) {
+    override fun onAction(action: ExchangeRateDetailsViewAction) {
         when (action) {
-            ExchangeRateOverviewViewAction.InitView -> initView()
+            is ExchangeRateDetailsViewAction.InitView -> initView(action.rateCode)
         }
     }
 
-    private fun initView() {
+    private fun initView(rateCode: String) {
         showLoadingView()
         viewModelScope.launch {
-//            loginRequestCodeUseCase(
-//                email = currentState().email,
-//            ).onSuccess {
-//                viewModelNavigator.push(LoginCodeScreen(email = currentState().email))
-//            }.onFailure {
-//                showErrorSnackbar(it)
-//            }
+            getExchangeRateUseCase()
+                .onSuccess {
+                    showContentView { copy(ratesMidWithDate = it) }
+                }.onFailure {
+                    showErrorSnackbar(it)
+                }
         }
     }
 }

@@ -115,4 +115,6 @@
     <string name="total_points">Twoje punkty</string>
     <string name="your_streak">Twoja seria</string>
     <string name="check_in_again">Możesz się ponownie zalogować!</string>
+
+    <string name ="exchange_rates">Kursy walut</string>
 </resources>

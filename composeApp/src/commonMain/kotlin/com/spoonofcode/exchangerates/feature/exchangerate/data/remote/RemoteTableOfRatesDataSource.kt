@@ -5,15 +5,15 @@ import com.spoonofcode.exchangerates.feature.exchangerate.data.remote.model.Tabl
 import io.ktor.http.HttpMethod
 
 class RemoteTableOfRatesDataSource() : RemoteBaseDataSource(
-    collectionName = "/api/exchangerates/tables",
+    collectionName = "api/exchangerates/tables",
 ) {
-    suspend fun readTableA(): Result<TableOfRatesResponse> = doRequest(
-        urlPostfixPath = "A",
+    suspend fun readTableA(): Result<List<TableOfRatesResponse>> = doRequest(
+        urlPostfixPath = "a",
         method = HttpMethod.Get,
     )
 
-    suspend fun readTableB(): Result<TableOfRatesResponse> = doRequest(
-        urlPostfixPath = "B",
+    suspend fun readTableB(): Result<List<TableOfRatesResponse>> = doRequest(
+        urlPostfixPath = "b",
         method = HttpMethod.Get,
     )
 }

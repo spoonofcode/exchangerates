@@ -10,8 +10,8 @@ val appModule = module {
     includes(
         // core
         coreBaseModule,
-        uiModule,
         networkModule,
+        uiModule,
 
         // features
         loginModule,

@@ -1,32 +1,22 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.domain.usecase
 
-import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.TableOfRates
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
 import kotlinx.coroutines.async
-import kotlinx.coroutines.supervisorScope
+import kotlinx.coroutines.coroutineScope
 
 class GetAllExchangeRatesUseCase(
     private val tableOfRatesRepository: TableOfRatesRepository,
 ) {
-    suspend operator fun invoke(
-        email: String,
-        code: String,
-    ): Result<TableOfRates> =
-        supervisorScope {
-            val tableADeferred = async {
-                runCatching {
-                    tableOfRatesRepository.readTableA()
-                }
-            }
-            val tableBDeferred = async {
-                runCatching {
-                    tableOfRatesRepository.readTableB()
-                }
-            }
+    suspend operator fun invoke(): Result<List<Rate>> = runCatching {
+        coroutineScope {
+            val tableADeferred = async { tableOfRatesRepository.readTableA() }
+            val tableBDeferred = async { tableOfRatesRepository.readTableB() }
 
-            val tableA = tableADeferred.await()
-            val tableB = tableBDeferred.await()
+            val tableA = tableADeferred.await().getOrThrow()
+            val tableB = tableBDeferred.await().getOrThrow()
 
-            return Result.success(TableOfRates())
+            tableA + tableB
         }
+    }
 }

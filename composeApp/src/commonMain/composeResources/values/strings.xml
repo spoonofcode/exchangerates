@@ -116,4 +116,6 @@
     <string name="total_points">Your Points</string>
     <string name="your_streak">Your streak</string>
     <string name="check_in_again">You can check in again!</string>
+
+    <string name ="exchange_rates">Exchange rates</string>
 </resources>

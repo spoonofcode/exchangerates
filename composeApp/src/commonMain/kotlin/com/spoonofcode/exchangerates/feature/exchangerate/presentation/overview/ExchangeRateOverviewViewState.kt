@@ -2,10 +2,9 @@ package com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview
 
 import androidx.compose.runtime.Immutable
 import com.spoonofcode.exchangerates.core.ui.base.BaseViewState
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 
 @Immutable
 internal data class ExchangeRateOverviewViewState(
-//    val email: String = "daria.waszkiewicz@gmail.com",
-    val email: String = "luczak.bartosz5@gmail.com",
-    val password: String = "daria123",
+    val rates: List<Rate> = emptyList(),
 ) : BaseViewState()

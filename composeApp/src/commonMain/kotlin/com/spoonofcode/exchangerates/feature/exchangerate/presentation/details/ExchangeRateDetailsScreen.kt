@@ -1,99 +1,62 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.presentation.details
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.spoonofcode.exchangerates.core.ui.base.BaseScreen
-import com.spoonofcode.exchangerates.core.ui.compose.Paddings
-import com.spoonofcode.exchangerates.core.ui.compose.Spacers
+import com.spoonofcode.exchangerates.core.ui.compose.Paddings.spaceBetweenListElements
 import com.spoonofcode.exchangerates.core.ui.compose.Texts
 import com.spoonofcode.exchangerates.core.ui.ext.koinViewModel
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewAction
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewModel
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewState
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.RateMidWithDate
 import com.spoonofcode.exchangerates.resources.Res
-import com.spoonofcode.exchangerates.resources.let_s_get_started
-import com.spoonofcode.exchangerates.resources.or
-import org.jetbrains.compose.resources.stringResource
+import com.spoonofcode.exchangerates.resources.exchange_rates
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
-internal class ExchangeRateDetailsScreen() :
-    BaseScreen<ExchangeRateOverviewViewModel, ExchangeRateOverviewViewState, ExchangeRateOverviewViewAction>() {
+internal class ExchangeRateDetailsScreen(
+    override val verticalScrollEnable: Boolean = false,
+    private val rateCode: String,
+) :
+    BaseScreen<ExchangeRateDetailsViewModel, ExchangeRateDetailsViewState, ExchangeRateDetailsViewAction>() {
+
+    override fun provideTopAppBarTitle() = Res.string.exchange_rates
+
+    override fun provideInitAction(onAction: (ExchangeRateDetailsViewAction) -> Unit): () -> Unit =
+        { onAction(ExchangeRateDetailsViewAction.InitView(rateCode = rateCode)) }
 
     @Composable
-    override fun provideViewModel() = koinViewModel<ExchangeRateOverviewViewModel>()
+    override fun provideViewModel() = koinViewModel<ExchangeRateDetailsViewModel>()
 
     @Composable
     override fun provideContent(
-        viewState: ExchangeRateOverviewViewState,
-        onAction: (ExchangeRateOverviewViewAction) -> Unit,
+        viewState: ExchangeRateDetailsViewState,
+        onAction: (ExchangeRateDetailsViewAction) -> Unit,
     ): @Composable (ColumnScope.() -> Unit) {
         return {
-            Column(
-                modifier = Modifier.fillMaxSize().padding(
-                    top = Paddings.screenPadding,
-                ),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(spaceBetweenListElements)
             ) {
-                Spacers.VerticalBetweenFields()
-                Texts.HL(stringResource(resource = Res.string.let_s_get_started))
+                items(viewState.ratesMidWithDate) { rateMidWithDate ->
+                    RateMidWithDateItem(
+                        item = rateMidWithDate,
+                    )
+                }
             }
 
-            Spacers.VerticalBetweenFields()
-
-            Spacers.VerticalBetweenFields()
-
-            LabeledDivider()
-
-            Spacers.VerticalBetweenFields()
         }
     }
 
     @Composable
-    fun LabeledDivider(
-        text: String = stringResource(resource = Res.string.or),
-        modifier: Modifier = Modifier,
-        lineColor: Color = MaterialTheme.colorScheme.outlineVariant,
-        textColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-        thickness: Dp = 1.dp,
+    fun RateMidWithDateItem(
+        item: RateMidWithDate,
     ) {
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            HorizontalDivider(
-                modifier = Modifier.weight(1f),
-                thickness = thickness,
-                color = lineColor
-            )
-
-            Text(
-                text = text,
-                modifier = Modifier.padding(vertical = 2.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = textColor
-            )
-
-            HorizontalDivider(
-                modifier = Modifier.weight(1f),
-                thickness = thickness,
-                color = lineColor
-            )
-        }
+        println("BARTEK $item")
+        Texts.BL(item.mid.toString())
+        Texts.BL(item.effectiveDate)
     }
 }
 
@@ -101,8 +64,10 @@ internal class ExchangeRateDetailsScreen() :
 @Preview
 @Composable
 private fun ExchangeRateDetailsScreenContentPreview() {
-    ExchangeRateDetailsScreen().PreviewContent(
-        ExchangeRateOverviewViewState()
+    ExchangeRateDetailsScreen(
+        rateCode = "EUR"
+    ).PreviewContent(
+        ExchangeRateDetailsViewState()
     )
 }
 // endregion

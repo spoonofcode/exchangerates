@@ -5,8 +5,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.mokkery)
+    alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.kover)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -27,9 +28,14 @@ kotlin {
     }
     
     sourceSets {
+        iosMain.dependencies {
+            implementation(libs.ktor.client.ios)
+        }
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

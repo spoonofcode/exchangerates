@@ -1,35 +1,35 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spoonofcode.exchangerates.core.ui.base.BaseScreen
-import com.spoonofcode.exchangerates.core.ui.compose.Paddings
-import com.spoonofcode.exchangerates.core.ui.compose.Spacers
+import com.spoonofcode.exchangerates.core.ui.compose.Paddings.spaceBetweenListElements
 import com.spoonofcode.exchangerates.core.ui.compose.Texts
 import com.spoonofcode.exchangerates.core.ui.ext.koinViewModel
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 import com.spoonofcode.exchangerates.resources.Res
-import com.spoonofcode.exchangerates.resources.let_s_get_started
-import com.spoonofcode.exchangerates.resources.or
-import org.jetbrains.compose.resources.stringResource
+import com.spoonofcode.exchangerates.resources.exchange_rates
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 internal class ExchnageRateOverviewScreen(
+    override val verticalScrollEnable: Boolean = false,
     override val backNavigationEnable: Boolean = false,
 ) : BaseScreen<ExchangeRateOverviewViewModel, ExchangeRateOverviewViewState, ExchangeRateOverviewViewAction>() {
+
+    override fun provideTopAppBarTitle() = Res.string.exchange_rates
+
+    override fun provideInitAction(onAction: (ExchangeRateOverviewViewAction) -> Unit): () -> Unit =
+        { onAction(ExchangeRateOverviewViewAction.InitView) }
 
     @Composable
     override fun provideViewModel() = koinViewModel<ExchangeRateOverviewViewModel>()
@@ -40,57 +40,35 @@ internal class ExchnageRateOverviewScreen(
         onAction: (ExchangeRateOverviewViewAction) -> Unit,
     ): @Composable (ColumnScope.() -> Unit) {
         return {
-            Column(
-                modifier = Modifier.fillMaxSize().padding(
-                    top = Paddings.screenPadding,
-                ),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(spaceBetweenListElements)
             ) {
-                Spacers.VerticalBetweenFields()
-                Texts.HL(stringResource(resource = Res.string.let_s_get_started))
+                items(viewState.rates) { rate ->
+                    RateItem(
+                        item = rate,
+                        onClick = { onAction(ExchangeRateOverviewViewAction.SelectRate(rate.code)) }
+                    )
+                }
             }
-
-            Spacers.VerticalBetweenFields()
-
-            Spacers.VerticalBetweenFields()
-
-            LabeledDivider()
-
-            Spacers.VerticalBetweenFields()
         }
     }
 
     @Composable
-    fun LabeledDivider(
-        text: String = stringResource(resource = Res.string.or),
+    fun RateItem(
+        item: Rate,
+        onClick: () -> Unit,
         modifier: Modifier = Modifier,
-        lineColor: Color = MaterialTheme.colorScheme.outlineVariant,
-        textColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-        thickness: Dp = 1.dp,
     ) {
-        Row(
+        ElevatedCard(
+            onClick = onClick,
             modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            shape = MaterialTheme.shapes.large,
+            elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
         ) {
-            HorizontalDivider(
-                modifier = Modifier.weight(1f),
-                thickness = thickness,
-                color = lineColor
-            )
-
-            Text(
-                text = text,
-                modifier = Modifier.padding(vertical = 2.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                color = textColor
-            )
-
-            HorizontalDivider(
-                modifier = Modifier.weight(1f),
-                thickness = thickness,
-                color = lineColor
-            )
+            Texts.BL(item.code)
+            Texts.BL(item.currency)
+            Texts.BL(item.mid.toString())
         }
     }
 }
