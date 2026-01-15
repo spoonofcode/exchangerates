@@ -47,7 +47,14 @@ internal class ExchnageRateOverviewScreen(
                 items(viewState.rates) { rate ->
                     RateItem(
                         item = rate,
-                        onClick = { onAction(ExchangeRateOverviewViewAction.SelectRate(rate.code)) }
+                        onClick = {
+                            onAction(
+                                ExchangeRateOverviewViewAction.SelectRate(
+                                    rateCode = rate.code,
+                                    tableCode = "a"
+                                )
+                            )
+                        }
                     )
                 }
             }

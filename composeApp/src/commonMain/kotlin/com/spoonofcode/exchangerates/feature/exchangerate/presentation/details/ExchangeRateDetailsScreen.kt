@@ -19,13 +19,21 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 internal class ExchangeRateDetailsScreen(
     override val verticalScrollEnable: Boolean = false,
     private val rateCode: String,
+    private val tableCode: String,
 ) :
     BaseScreen<ExchangeRateDetailsViewModel, ExchangeRateDetailsViewState, ExchangeRateDetailsViewAction>() {
 
     override fun provideTopAppBarTitle() = Res.string.exchange_rates
 
     override fun provideInitAction(onAction: (ExchangeRateDetailsViewAction) -> Unit): () -> Unit =
-        { onAction(ExchangeRateDetailsViewAction.InitView(rateCode = rateCode)) }
+        {
+            onAction(
+                ExchangeRateDetailsViewAction.InitView(
+                    rateCode = rateCode,
+                    tableCode = tableCode
+                )
+            )
+        }
 
     @Composable
     override fun provideViewModel() = koinViewModel<ExchangeRateDetailsViewModel>()
@@ -65,7 +73,8 @@ internal class ExchangeRateDetailsScreen(
 @Composable
 private fun ExchangeRateDetailsScreenContentPreview() {
     ExchangeRateDetailsScreen(
-        rateCode = "EUR"
+        rateCode = "EUR",
+        tableCode = "A"
     ).PreviewContent(
         ExchangeRateDetailsViewState()
     )

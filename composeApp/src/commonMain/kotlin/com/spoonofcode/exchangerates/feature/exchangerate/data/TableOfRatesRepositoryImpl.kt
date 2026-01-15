@@ -21,7 +21,10 @@ class TableOfRatesRepositoryImpl(
         remoteTableOfRatesDataSource.readTableB()
             .map { response -> response.first().rates.map { it.toRate() } }
 
-    override suspend fun readRatesMidWithDate(): Result<List<RateMidWithDate>> =
-        remoteRatesDataSource.readRatesMidWithDate()
+    override suspend fun readRatesMidWithDate(
+        rateCode: String,
+        tableCode: String
+    ): Result<List<RateMidWithDate>> =
+        remoteRatesDataSource.readRatesMidWithDate(rateCode = rateCode, tableCode = tableCode)
             .map { response -> response.rates.map { it.toRateMidWithDate() } }
 }

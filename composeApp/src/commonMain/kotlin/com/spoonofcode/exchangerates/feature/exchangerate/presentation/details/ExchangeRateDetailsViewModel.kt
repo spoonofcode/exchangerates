@@ -13,14 +13,17 @@ internal class ExchangeRateDetailsViewModel(
 
     override fun onAction(action: ExchangeRateDetailsViewAction) {
         when (action) {
-            is ExchangeRateDetailsViewAction.InitView -> initView(action.rateCode)
+            is ExchangeRateDetailsViewAction.InitView -> initView(
+                rateCode = action.rateCode,
+                tableCode = action.tableCode
+            )
         }
     }
 
-    private fun initView(rateCode: String) {
+    private fun initView(rateCode: String, tableCode: String) {
         showLoadingView()
         viewModelScope.launch {
-            getExchangeRateUseCase()
+            getExchangeRateUseCase(rateCode = rateCode, tableCode = tableCode)
                 .onSuccess {
                     showContentView { copy(ratesMidWithDate = it) }
                 }.onFailure {

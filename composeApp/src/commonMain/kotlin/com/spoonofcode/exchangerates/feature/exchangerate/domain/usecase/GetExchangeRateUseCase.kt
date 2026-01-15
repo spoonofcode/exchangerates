@@ -6,5 +6,9 @@ import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.Tabl
 class GetExchangeRateUseCase(
     private val tableOfRatesRepository: TableOfRatesRepository,
 ) {
-    suspend operator fun invoke(): Result<List<RateMidWithDate>> = tableOfRatesRepository.readRatesMidWithDate()
+    suspend operator fun invoke(
+        rateCode: String,
+        tableCode: String
+    ): Result<List<RateMidWithDate>> =
+        tableOfRatesRepository.readRatesMidWithDate(rateCode = rateCode, tableCode = tableCode)
 }

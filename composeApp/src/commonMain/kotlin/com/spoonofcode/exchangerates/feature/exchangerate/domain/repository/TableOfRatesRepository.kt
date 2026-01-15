@@ -6,5 +6,8 @@ import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.RateMidWi
 interface TableOfRatesRepository {
     suspend fun readTableA(): Result<List<Rate>>
     suspend fun readTableB(): Result<List<Rate>>
-    suspend fun readRatesMidWithDate(): Result<List<RateMidWithDate>>
+    suspend fun readRatesMidWithDate(
+        rateCode: String,
+        tableCode: String
+    ): Result<List<RateMidWithDate>>
 }
