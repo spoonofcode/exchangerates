@@ -3,8 +3,8 @@ package com.spoonofcode.exchangerates.core.ui.base
 import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigator
 import dev.mokkery.MockMode
 import dev.mokkery.mock
-import org.koin.core.component.get
 import org.koin.dsl.module
+import org.koin.test.get
 import kotlin.test.BeforeTest
 
 abstract class BaseViewModelTest : BaseTest() {

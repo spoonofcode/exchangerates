@@ -1,14 +1,17 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.details
 
 import app.cash.turbine.test
+import com.spoonofcode.exchangerates.core.data.mockdata.RatesMidWithDateMockData
 import com.spoonofcode.exchangerates.core.ui.base.BaseViewModelTest
 import com.spoonofcode.exchangerates.core.ui.base.ScreenState
 import com.spoonofcode.exchangerates.core.ui.base.ViewState
-import com.spoonofcode.exchangerates.feature.exchangerate.di.loginTestModule
+import com.spoonofcode.exchangerates.feature.exchangerate.di.exchangeRateTestModule
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.usecase.GetExchangeRateUseCase.Companion.SIGNIFICANT_CHANGE_THRESHOLD
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsViewAction
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsViewState
+import com.spoonofcode.exchangerates.feature.exchangerate.presentation.mappers.toRateMidWithDateUi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
@@ -23,7 +26,7 @@ class ExchangeRateDetailsViewModelTest : BaseViewModelTest() {
 
     @BeforeTest
     override fun setup() {
-        modules = arrayOf(loginTestModule)
+        modules = arrayOf(exchangeRateTestModule)
         super.setup()
         tableOfRatesRepository = getKoin().get()
         viewModel = getSut()
@@ -35,7 +38,7 @@ class ExchangeRateDetailsViewModelTest : BaseViewModelTest() {
             assertEquals(
                 expected = ViewState(
                     data = ExchangeRateDetailsViewState(),
-                    screenState = ScreenState.CONTENT,
+                    screenState = ScreenState.LOADING,
                 ),
                 actual = awaitItem()
             )
@@ -57,8 +60,12 @@ class ExchangeRateDetailsViewModelTest : BaseViewModelTest() {
             assertEquals(
                 expected = ViewState(
                     data = ExchangeRateDetailsViewState(
-                        ratesMidWithDate = listOf(
-                        ),
+                        ratesMidWithDate = RatesMidWithDateMockData.RATES_MID_WITH_DATE.map {
+                            it.toRateMidWithDateUi(
+                                currentMid = RatesMidWithDateMockData.RATES_MID_WITH_DATE.last().mid,
+                                significantChangeThreshold = SIGNIFICANT_CHANGE_THRESHOLD
+                            )
+                        },
                     ),
                     screenState = ScreenState.CONTENT,
                 ),

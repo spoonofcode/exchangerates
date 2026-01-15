@@ -1,10 +1,11 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.overview
 
 import app.cash.turbine.test
+import com.spoonofcode.exchangerates.core.data.mockdata.RatesMockData
 import com.spoonofcode.exchangerates.core.ui.base.BaseViewModelTest
 import com.spoonofcode.exchangerates.core.ui.base.ScreenState
 import com.spoonofcode.exchangerates.core.ui.base.ViewState
-import com.spoonofcode.exchangerates.feature.exchangerate.di.loginTestModule
+import com.spoonofcode.exchangerates.feature.exchangerate.di.exchangeRateTestModule
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsScreen
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewAction
@@ -27,7 +28,7 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
 
     @BeforeTest
     override fun setup() {
-        modules = arrayOf(loginTestModule)
+        modules = arrayOf(exchangeRateTestModule)
         super.setup()
         tableOfRatesRepository = getKoin().get()
         viewModel = getSut()
@@ -39,7 +40,7 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
             assertEquals(
                 expected = ViewState(
                     data = ExchangeRateOverviewViewState(),
-                    screenState = ScreenState.CONTENT,
+                    screenState = ScreenState.LOADING,
                 ),
                 actual = awaitItem()
             )
@@ -56,7 +57,7 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
             assertEquals(
                 expected = ViewState(
                     data = ExchangeRateOverviewViewState(
-                        rates = emptyList(),
+                        rates = RatesMockData.TABLE_A + RatesMockData.TABLE_B,
                     ),
                     screenState = ScreenState.CONTENT,
                 ),

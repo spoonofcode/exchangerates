@@ -13,6 +13,7 @@ import org.koin.core.context.stopKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.koin.test.KoinTest
+import org.koin.test.get
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 

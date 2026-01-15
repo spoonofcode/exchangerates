@@ -15,7 +15,7 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val loginModule: Module = module {
+val exchangeRateModule: Module = module {
 
     singleOf(::TableOfRatesRepositoryImpl).bind<TableOfRatesRepository>()
 
