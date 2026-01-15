@@ -34,7 +34,7 @@ internal class ExchangeRateDetailsViewModel(
                         )
                     }
                 }.onFailure {
-                    showErrorSnackbar(it)
+                    showErrorView()
                 }
         }
     }

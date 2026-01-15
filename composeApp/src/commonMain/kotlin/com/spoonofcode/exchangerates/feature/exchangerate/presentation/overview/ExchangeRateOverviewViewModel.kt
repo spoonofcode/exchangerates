@@ -30,7 +30,7 @@ internal class ExchangeRateOverviewViewModel(
                 .onSuccess {
                     showContentView { copy(rates = it) }
                 }.onFailure {
-                    showErrorSnackbar(it)
+                    showErrorView()
                 }
         }
     }
