@@ -6,11 +6,13 @@ import com.spoonofcode.exchangerates.core.ui.base.BaseViewModelTest
 import com.spoonofcode.exchangerates.core.ui.base.ScreenState
 import com.spoonofcode.exchangerates.core.ui.base.ViewState
 import com.spoonofcode.exchangerates.feature.exchangerate.di.exchangeRateTestModule
-import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.ExchangeRatesRepository
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsScreen
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewAction
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewState
+import dev.mokkery.answering.returns
+import dev.mokkery.everySuspend
 import dev.mokkery.matcher.ofType
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,13 +26,13 @@ import kotlin.test.assertEquals
 class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
 
     private lateinit var viewModel: ExchangeRateOverviewViewModel
-    private lateinit var tableOfRatesRepository: TableOfRatesRepository
+    private lateinit var exchangeRatesRepository: ExchangeRatesRepository
 
     @BeforeTest
     override fun setup() {
         modules = arrayOf(exchangeRateTestModule)
         super.setup()
-        tableOfRatesRepository = getKoin().get()
+        exchangeRatesRepository = getKoin().get()
         viewModel = getSut()
     }
 
@@ -63,6 +65,30 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
                 ),
                 actual = awaitItem()
             )
+        }
+    }
+
+    @Test
+    fun `init view error`() = runTest {
+        everySuspend { exchangeRatesRepository.readTableA() } returns
+                Result.failure(Exception("not found"))
+
+        viewModel.viewState.test {
+            skipItems(1)
+
+            viewModel.onAction(ExchangeRateOverviewViewAction.InitView)
+
+            assertEquals(
+                expected = ViewState(
+                    data = ExchangeRateOverviewViewState(),
+                    screenState = ScreenState.ERROR,
+                ),
+                actual = awaitItem()
+            )
+        }
+
+        verifySuspend {
+            exchangeRatesRepository.readTableA()
         }
     }
 

@@ -4,7 +4,7 @@ import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.RateMidWithDate
 import kotlinx.datetime.LocalDate
 
-interface TableOfRatesRepository {
+interface ExchangeRatesRepository {
     suspend fun readTableA(): Result<List<Rate>>
     suspend fun readTableB(): Result<List<Rate>>
     suspend fun readRatesMidWithDate(
