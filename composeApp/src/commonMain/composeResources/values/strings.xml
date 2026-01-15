@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Exchange Rates</string>
+    <string name="data_could_not_be_loaded">Data could not be loaded</string>
+    <string name ="exchange_rate">Exchange rate</string>
+    <string name ="exchange_rates">Exchange rates</string>
+    <string name="reload">Reload</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kursy Walut</string>
+    <string name="data_could_not_be_loaded">Nie udało się wczytać danych</string>
+    <string name ="exchange_rate">Kurs waluty</string>
+    <string name ="exchange_rates">Kursy walut</string>
+    <string name="reload">Odśwież</string>
+</resources>
