@@ -1,4 +1,4 @@
-package com.spoonofcode.exchangerates.core
+package com.spoonofcode.exchangerates.core.dispatchers
 
 import com.spoonofcode.exchangerates.core.data.base.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher

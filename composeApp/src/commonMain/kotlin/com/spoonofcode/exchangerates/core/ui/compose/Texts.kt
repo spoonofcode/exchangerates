@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 
 object Texts {
     @Composable
@@ -274,10 +275,14 @@ object Texts {
     @Composable
     fun BL(
         text: String,
+        modifier: Modifier = Modifier,
         color: Color = Color.Unspecified,
+        textAlign: TextAlign? = null,
     ) {
         Text(
+            textAlign = textAlign,
             text = text,
+            modifier = modifier,
             color = color,
             style = MaterialTheme.typography.bodyLarge,
         )

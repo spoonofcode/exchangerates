@@ -15,8 +15,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.spoonofcode.exchangerates.resources.Res
+import com.spoonofcode.exchangerates.resources.compose_multiplatform
 import com.spoonofcode.exchangerates.resources.data_could_not_be_loaded
-import com.spoonofcode.exchangerates.resources.poa
 import com.spoonofcode.exchangerates.resources.reload
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ErrorView(
-    iconRes: DrawableResource = Res.drawable.poa,
+    iconRes: DrawableResource = Res.drawable.compose_multiplatform,
     sizeDp: Dp = 160.dp,
     reload: () -> Unit = {},
 ) {

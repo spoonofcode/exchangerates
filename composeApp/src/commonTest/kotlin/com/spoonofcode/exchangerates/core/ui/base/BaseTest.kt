@@ -1,6 +1,7 @@
-package com.spoonofcode.exchangerates.core.base
+package com.spoonofcode.exchangerates.core.ui.base
 
-import com.spoonofcode.poa.core.data.base.DispatcherProvider
+import com.spoonofcode.exchangerates.core.dispatchers.StandardTestDispatcherProvider
+import com.spoonofcode.exchangerates.core.data.base.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

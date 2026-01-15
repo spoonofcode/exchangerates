@@ -8,12 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.spoonofcode.exchangerates.resources.Res
-import com.spoonofcode.exchangerates.resources.poa
+import com.spoonofcode.exchangerates.resources.compose_multiplatform
 import org.jetbrains.compose.resources.DrawableResource
 
 @Composable
 fun LoadingView(
-    iconRes: DrawableResource = Res.drawable.poa,
+    iconRes: DrawableResource = Res.drawable.compose_multiplatform,
 ) {
     Column(
         modifier = Modifier.fillMaxSize().padding(Paddings.screenPadding),

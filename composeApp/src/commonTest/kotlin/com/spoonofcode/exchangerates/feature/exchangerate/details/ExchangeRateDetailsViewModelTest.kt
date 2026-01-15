@@ -1,7 +1,7 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.details
 
 import app.cash.turbine.test
-import com.spoonofcode.exchangerates.core.base.BaseViewModelTest
+import com.spoonofcode.exchangerates.core.ui.base.BaseViewModelTest
 import com.spoonofcode.exchangerates.core.ui.base.ScreenState
 import com.spoonofcode.exchangerates.core.ui.base.ViewState
 import com.spoonofcode.exchangerates.feature.exchangerate.di.loginTestModule

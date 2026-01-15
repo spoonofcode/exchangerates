@@ -1,15 +1,19 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.overview
 
 import app.cash.turbine.test
-import com.spoonofcode.exchangerates.core.base.BaseViewModelTest
+import com.spoonofcode.exchangerates.core.ui.base.BaseViewModelTest
 import com.spoonofcode.exchangerates.core.ui.base.ScreenState
 import com.spoonofcode.exchangerates.core.ui.base.ViewState
 import com.spoonofcode.exchangerates.feature.exchangerate.di.loginTestModule
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
+import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsScreen
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewAction
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewState
+import dev.mokkery.matcher.ofType
+import dev.mokkery.verifySuspend
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -59,5 +63,18 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
                 actual = awaitItem()
             )
         }
+    }
+
+    @Test
+    fun `select rate`() = runTest {
+        viewModel.onAction(
+            ExchangeRateOverviewViewAction.SelectRate(
+                rateCode = "USD",
+                tableCode = "A"
+            )
+        )
+        advanceUntilIdle()
+
+        verifySuspend { viewModelNavigator.push(ofType<ExchangeRateDetailsScreen>()) }
     }
 }

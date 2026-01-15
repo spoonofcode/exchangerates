@@ -13,6 +13,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.spoonofcode.exchangerates.core.ui.base.BaseScreen
 import com.spoonofcode.exchangerates.core.ui.compose.Paddings.spaceBetweenListElements
@@ -80,10 +81,18 @@ internal class ExchangeRateOverviewScreen(
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
             ) {
                 Texts.BL(item.code)
-                Spacers.Weight1(this)
-                Texts.BL(item.currency)
-                Spacers.Weight1(this)
-                Texts.BL(item.mid.toString())
+
+                Texts.BL(
+                    text = item.currency,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 8.dp),
+                )
+
+                Texts.BL(
+                    text = item.mid.toString(),
+                    textAlign = TextAlign.End
+                )
             }
         }
     }
