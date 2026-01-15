@@ -53,7 +53,8 @@ class ExchangeRateDetailsViewModelTest : BaseViewModelTest() {
             viewModel.onAction(
                 ExchangeRateDetailsViewAction.InitView(
                     rateCode = "USD",
-                    tableCode = "a"
+                    tableCode = "a",
+                    currency = "US Dollar",
                 )
             )
 
@@ -65,7 +66,9 @@ class ExchangeRateDetailsViewModelTest : BaseViewModelTest() {
                                 currentMid = RatesMidWithDateMockData.RATES_MID_WITH_DATE.last().mid,
                                 significantChangeThreshold = SIGNIFICANT_CHANGE_THRESHOLD
                             )
-                        },,
+                        }.sortedByDescending { it.effectiveDate },
+                        currency = "US Dollar",
+                        rateCode = "USD",
                     ),
                     screenState = ScreenState.CONTENT,
                 ),

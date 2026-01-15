@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 class ViewModelNavigatorImpl : ViewModelNavigator {
     private val _navigationEvents = MutableSharedFlow<NavigationEvent>()
 
-    val navigationEvents: SharedFlow<NavigationEvent>
+    override val navigationEvents: SharedFlow<NavigationEvent>
         get() = _navigationEvents.asSharedFlow()
 
     override suspend fun pop() = navigate(NavigationEvent.Pop)

@@ -3,7 +3,7 @@ package com.spoonofcode.exchangerates.core.ui.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spoonofcode.exchangerates.core.network.NetworkManager
-import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigatorImpl
+import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigator
 import com.spoonofcode.exchangerates.core.ui.snackbar.SnackbarEvent
 import dev.jordond.connectivity.Connectivity
 import kotlinx.coroutines.FlowPreview
@@ -22,7 +22,7 @@ abstract class BaseViewModel<VS : BaseViewState, VA : BaseViewAction>(
     initialScreenState: ScreenState = ScreenState.LOADING // Start Screen with LoadingView
 ) : ViewModel() {
 
-    protected val viewModelNavigator: ViewModelNavigatorImpl by getKoin().inject()
+    protected val viewModelNavigator: ViewModelNavigator by getKoin().inject()
     protected val networkManager: NetworkManager by getKoin().inject()
 
     val navigationFlow = viewModelNavigator.navigationEvents
