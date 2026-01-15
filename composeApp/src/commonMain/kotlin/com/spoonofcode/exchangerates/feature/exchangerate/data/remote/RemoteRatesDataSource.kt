@@ -10,9 +10,11 @@ class RemoteRatesDataSource() : RemoteBaseDataSource(
 
     suspend fun readRatesMidWithDate(
         rateCode: String,
-        tableCode: String
+        tableCode: String,
+        startDate: String = "2012-01-01",
+        endDate: String = "2012-01-31",
     ): Result<RatesMidWithDateResponse> = doRequest(
-        urlPostfixPath = "${tableCode}/${rateCode}/2012-01-01/2012-01-31",
+        urlPostfixPath = "$tableCode/$rateCode/$startDate/$endDate",
         method = HttpMethod.Get,
     )
 }

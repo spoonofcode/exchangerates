@@ -7,6 +7,7 @@ import com.spoonofcode.exchangerates.feature.exchangerate.data.remote.RemoteTabl
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.RateMidWithDate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
+import kotlinx.datetime.LocalDate
 
 class TableOfRatesRepositoryImpl(
     private val remoteTableOfRatesDataSource: RemoteTableOfRatesDataSource,
@@ -23,8 +24,15 @@ class TableOfRatesRepositoryImpl(
 
     override suspend fun readRatesMidWithDate(
         rateCode: String,
-        tableCode: String
+        tableCode: String,
+        startDate: LocalDate,
+        endDate: LocalDate,
     ): Result<List<RateMidWithDate>> =
-        remoteRatesDataSource.readRatesMidWithDate(rateCode = rateCode, tableCode = tableCode)
+        remoteRatesDataSource.readRatesMidWithDate(
+            rateCode = rateCode,
+            tableCode = tableCode,
+            startDate = startDate.toString(),
+            endDate = endDate.toString(),
+        )
             .map { response -> response.rates.map { it.toRateMidWithDate() } }
 }
