@@ -71,7 +71,7 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
         viewModel.onAction(
             ExchangeRateOverviewViewAction.SelectRate(
                 rateCode = "USD",
-                tableCode = "A"
+                tableCode = "A",
             )
         )
         advanceUntilIdle()

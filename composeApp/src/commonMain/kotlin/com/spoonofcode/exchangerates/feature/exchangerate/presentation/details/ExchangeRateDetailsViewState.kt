@@ -7,4 +7,6 @@ import com.spoonofcode.exchangerates.feature.exchangerate.presentation.model.Rat
 @Immutable
 internal data class ExchangeRateDetailsViewState(
     val ratesMidWithDate: List<RateMidWithDateUi> = emptyList(),
+    val currency: String = "",
+    val rateCode: String = "",
 ) : BaseViewState()

@@ -17,7 +17,8 @@ internal class ExchangeRateOverviewViewModel(
             ExchangeRateOverviewViewAction.InitView -> initView()
             is ExchangeRateOverviewViewAction.SelectRate -> selectRate(
                 rateCode = action.rateCode,
-                tableCode = action.tableCode
+                tableCode = action.tableCode,
+                currency = action.currency,
             )
         }
     }
@@ -34,12 +35,13 @@ internal class ExchangeRateOverviewViewModel(
         }
     }
 
-    private fun selectRate(rateCode: String, tableCode: String) {
+    private fun selectRate(rateCode: String, tableCode: String, currency: String) {
         viewModelScope.launch {
             viewModelNavigator.push(
                 ExchangeRateDetailsScreen(
                     rateCode = rateCode,
-                    tableCode = tableCode
+                    tableCode = tableCode,
+                    currency = currency,
                 )
             )
         }

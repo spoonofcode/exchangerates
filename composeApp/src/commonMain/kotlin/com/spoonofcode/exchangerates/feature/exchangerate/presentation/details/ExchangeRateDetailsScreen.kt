@@ -24,6 +24,7 @@ internal class ExchangeRateDetailsScreen(
     override val verticalScrollEnable: Boolean = false,
     private val rateCode: String,
     private val tableCode: String,
+    private val currency: String,
 ) :
     BaseScreen<ExchangeRateDetailsViewModel, ExchangeRateDetailsViewState, ExchangeRateDetailsViewAction>() {
 
@@ -34,7 +35,8 @@ internal class ExchangeRateDetailsScreen(
             onAction(
                 ExchangeRateDetailsViewAction.InitView(
                     rateCode = rateCode,
-                    tableCode = tableCode
+                    tableCode = tableCode,
+                    currency = currency,
                 )
             )
         }
@@ -48,6 +50,15 @@ internal class ExchangeRateDetailsScreen(
         onAction: (ExchangeRateDetailsViewAction) -> Unit,
     ): @Composable (ColumnScope.() -> Unit) {
         return {
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Texts.HL(text = viewState.rateCode)
+                Spacers.HorizontalBetweenFields()
+                Texts.HL(text = viewState.currency)
+            }
+
+            Spacers.VerticalBetweenFields()
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(spaceBetweenListElements)
@@ -85,7 +96,8 @@ internal class ExchangeRateDetailsScreen(
 private fun ExchangeRateDetailsScreenContentPreview() {
     ExchangeRateDetailsScreen(
         rateCode = "EUR",
-        tableCode = "A"
+        currency = "Euro",
+        tableCode = "a"
     ).PreviewContent(
         ExchangeRateDetailsViewState()
     )

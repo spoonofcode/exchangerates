@@ -65,7 +65,7 @@ class ExchangeRateDetailsViewModelTest : BaseViewModelTest() {
                                 currentMid = RatesMidWithDateMockData.RATES_MID_WITH_DATE.last().mid,
                                 significantChangeThreshold = SIGNIFICANT_CHANGE_THRESHOLD
                             )
-                        },
+                        },,
                     ),
                     screenState = ScreenState.CONTENT,
                 ),

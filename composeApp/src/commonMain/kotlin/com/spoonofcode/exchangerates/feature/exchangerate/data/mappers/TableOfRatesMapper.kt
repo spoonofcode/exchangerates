@@ -5,11 +5,12 @@ import com.spoonofcode.exchangerates.feature.exchangerate.data.remote.model.Rate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.RateMidWithDate
 
-fun RateResponse.toRate(): Rate {
+fun RateResponse.toRate(tableCode: String): Rate {
     return Rate(
         currency = currency,
         code = code,
-        mid = mid
+        mid = mid,
+        tableCode = tableCode,
     )
 }
 

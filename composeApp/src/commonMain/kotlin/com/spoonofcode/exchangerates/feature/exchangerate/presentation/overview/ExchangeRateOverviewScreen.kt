@@ -17,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.spoonofcode.exchangerates.core.ui.base.BaseScreen
 import com.spoonofcode.exchangerates.core.ui.compose.Paddings.spaceBetweenListElements
-import com.spoonofcode.exchangerates.core.ui.compose.Spacers
 import com.spoonofcode.exchangerates.core.ui.compose.Texts
 import com.spoonofcode.exchangerates.core.ui.ext.koinViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
@@ -55,7 +54,8 @@ internal class ExchangeRateOverviewScreen(
                             onAction(
                                 ExchangeRateOverviewViewAction.SelectRate(
                                     rateCode = rate.code,
-                                    tableCode = "a"
+                                    tableCode = rate.tableCode,
+                                    currency = rate.currency,
                                 )
                             )
                         }
