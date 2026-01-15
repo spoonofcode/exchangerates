@@ -6,13 +6,13 @@ import com.spoonofcode.exchangerates.feature.exchangerate.data.remote.RemoteRate
 import com.spoonofcode.exchangerates.feature.exchangerate.data.remote.RemoteTableOfRatesDataSource
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.Rate
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.model.RateMidWithDate
-import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.TableOfRatesRepository
+import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.ExchangeRatesRepository
 import kotlinx.datetime.LocalDate
 
-class TableOfRatesRepositoryImpl(
+class ExchangeRatesRepositoryImpl(
     private val remoteTableOfRatesDataSource: RemoteTableOfRatesDataSource,
     private val remoteRatesDataSource: RemoteRatesDataSource,
-) : TableOfRatesRepository {
+) : ExchangeRatesRepository {
 
     override suspend fun readTableA(): Result<List<Rate>> =
         remoteTableOfRatesDataSource.readTableA()
