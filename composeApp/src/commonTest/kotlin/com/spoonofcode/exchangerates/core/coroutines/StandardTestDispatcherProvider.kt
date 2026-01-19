@@ -1,6 +1,5 @@
-package com.spoonofcode.exchangerates.core.dispatchers
+package com.spoonofcode.exchangerates.core.coroutines
 
-import com.spoonofcode.exchangerates.core.coroutines.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 
