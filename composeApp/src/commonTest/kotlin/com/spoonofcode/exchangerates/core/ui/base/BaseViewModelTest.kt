@@ -1,5 +1,6 @@
 package com.spoonofcode.exchangerates.core.ui.base
 
+import com.spoonofcode.exchangerates.core.navigation.VoyagerRouteResolver
 import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigator
 import dev.mokkery.MockMode
 import dev.mokkery.mock
@@ -9,6 +10,7 @@ import kotlin.test.BeforeTest
 
 abstract class BaseViewModelTest : BaseTest() {
     protected lateinit var viewModelNavigator: ViewModelNavigator
+    protected lateinit var routeResolver: VoyagerRouteResolver
 
     @BeforeTest
     override fun setup() {
@@ -17,10 +19,12 @@ abstract class BaseViewModelTest : BaseTest() {
         )
         super.setup()
         viewModelNavigator = get()
+        routeResolver = get()
     }
 
     private fun testModule() = module {
         single { mock<ViewModelNavigator>(mode = MockMode.autofill) }
+        single { mock<VoyagerRouteResolver>(mode = MockMode.autofill) }
     }
 
 }

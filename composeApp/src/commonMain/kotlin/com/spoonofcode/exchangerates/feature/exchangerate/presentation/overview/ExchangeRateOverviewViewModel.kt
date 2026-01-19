@@ -3,7 +3,7 @@ package com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview
 import androidx.lifecycle.viewModelScope
 import com.spoonofcode.exchangerates.core.ui.base.BaseViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.usecase.GetAllExchangeRatesUseCase
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsScreen
+import com.spoonofcode.exchangerates.navigation.ExchangeRateModule
 import kotlinx.coroutines.launch
 
 internal class ExchangeRateOverviewViewModel(
@@ -38,10 +38,12 @@ internal class ExchangeRateOverviewViewModel(
     private fun selectRate(rateCode: String, tableCode: String, currency: String) {
         viewModelScope.launch {
             viewModelNavigator.push(
-                ExchangeRateDetailsScreen(
-                    rateCode = rateCode,
-                    tableCode = tableCode,
-                    currency = currency,
+                voyagerRouteResolver.resolve(
+                    ExchangeRateModule.ExchangeRateDetialsScreen(
+                        rateCode = rateCode,
+                        tableCode = tableCode,
+                        currency = currency,
+                    )
                 )
             )
         }

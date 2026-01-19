@@ -7,13 +7,12 @@ import com.spoonofcode.exchangerates.core.ui.base.ScreenState
 import com.spoonofcode.exchangerates.core.ui.base.ViewState
 import com.spoonofcode.exchangerates.feature.exchangerate.di.exchangeRateTestModule
 import com.spoonofcode.exchangerates.feature.exchangerate.domain.repository.ExchangeRatesRepository
-import com.spoonofcode.exchangerates.feature.exchangerate.presentation.details.ExchangeRateDetailsScreen
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewAction
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewModel
 import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.ExchangeRateOverviewViewState
+import com.spoonofcode.exchangerates.navigation.ExchangeRateModule
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
-import dev.mokkery.matcher.ofType
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -94,15 +93,27 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `select rate`() = runTest {
+        val rateCode = "USD"
+        val tableCode = "a"
+        val currency = "dolar amerykański"
+
         viewModel.onAction(
             ExchangeRateOverviewViewAction.SelectRate(
-                rateCode = "USD",
-                tableCode = "a",
-                currency = "dolar amerykański"
+                rateCode = rateCode,
+                tableCode = tableCode,
+                currency = currency,
             )
         )
         advanceUntilIdle()
 
-        verifySuspend { viewModelNavigator.push(ofType<ExchangeRateDetailsScreen>()) }
+        verifySuspend {
+            routeResolver.resolve(
+                ExchangeRateModule.ExchangeRateDetialsScreen(
+                    rateCode = rateCode,
+                    tableCode = tableCode,
+                    currency = currency,
+                )
+            )
+        }
     }
 }

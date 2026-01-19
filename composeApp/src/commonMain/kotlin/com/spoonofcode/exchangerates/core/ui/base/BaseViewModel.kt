@@ -2,6 +2,7 @@ package com.spoonofcode.exchangerates.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.spoonofcode.exchangerates.core.navigation.VoyagerRouteResolver
 import com.spoonofcode.exchangerates.core.network.NetworkManager
 import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigator
 import com.spoonofcode.exchangerates.core.ui.snackbar.SnackbarEvent
@@ -24,6 +25,7 @@ abstract class BaseViewModel<VS : BaseViewState, VA : BaseViewAction>(
 
     protected val viewModelNavigator: ViewModelNavigator by getKoin().inject()
     protected val networkManager: NetworkManager by getKoin().inject()
+    protected val voyagerRouteResolver: VoyagerRouteResolver by getKoin().inject()
 
     val navigationFlow = viewModelNavigator.navigationEvents
 
