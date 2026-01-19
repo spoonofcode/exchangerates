@@ -39,7 +39,7 @@ internal class ExchangeRateOverviewViewModel(
         viewModelScope.launch {
             viewModelNavigator.push(
                 voyagerRouteResolver.resolve(
-                    ExchangeRateModule.ExchangeRateDetialsScreen(
+                    ExchangeRateModule.ExchangeRateDetailsScreen(
                         rateCode = rateCode,
                         tableCode = tableCode,
                         currency = currency,

@@ -20,6 +20,7 @@ abstract class BaseViewModelTest : BaseTest() {
         super.setup()
         viewModelNavigator = get()
         routeResolver = get()
+
     }
 
     private fun testModule() = module {

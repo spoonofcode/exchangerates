@@ -11,7 +11,7 @@ internal class ExchangeRateRouteResolver : ModuleRouteResolver<ExchangeRateModul
     override fun resolve(screen: Screen): cafe.adriel.voyager.core.screen.Screen? =
         (screen as? ExchangeRateModule)?.let {
             when (it) {
-                is ExchangeRateModule.ExchangeRateDetialsScreen -> ExchangeRateDetailsScreen(
+                is ExchangeRateModule.ExchangeRateDetailsScreen -> ExchangeRateDetailsScreen(
                     rateCode = it.rateCode,
                     tableCode = it.tableCode,
                     currency = it.currency,

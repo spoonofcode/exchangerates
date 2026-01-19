@@ -13,6 +13,7 @@ import com.spoonofcode.exchangerates.feature.exchangerate.presentation.overview.
 import com.spoonofcode.exchangerates.navigation.ExchangeRateModule
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
+import dev.mokkery.matcher.any
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -106,14 +107,17 @@ class ExchangeRateOverviewViewModelTest : BaseViewModelTest() {
         )
         advanceUntilIdle()
 
+        verifySuspend { viewModelNavigator.push(any()) }
+
         verifySuspend {
             routeResolver.resolve(
-                ExchangeRateModule.ExchangeRateDetialsScreen(
+                ExchangeRateModule.ExchangeRateDetailsScreen(
                     rateCode = rateCode,
                     tableCode = tableCode,
                     currency = currency,
                 )
             )
         }
+
     }
 }
