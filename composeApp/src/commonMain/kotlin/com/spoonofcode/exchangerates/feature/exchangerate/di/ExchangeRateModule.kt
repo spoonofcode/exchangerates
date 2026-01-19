@@ -1,6 +1,6 @@
 package com.spoonofcode.exchangerates.feature.exchangerate.di
 
-import com.spoonofcode.exchangerates.core.navigation.ModuleRouteResolver
+import com.spoonofcode.exchangerates.core.ui.navigation.route.ModuleRouteResolver
 import com.spoonofcode.exchangerates.feature.exchangerate.ExchangeRateRouteResolver
 import com.spoonofcode.exchangerates.feature.exchangerate.data.ExchangeRatesRepositoryImpl
 import com.spoonofcode.exchangerates.feature.exchangerate.data.remote.RemoteRatesDataSource

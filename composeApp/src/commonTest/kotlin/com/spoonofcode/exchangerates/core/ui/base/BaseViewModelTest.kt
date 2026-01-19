@@ -1,6 +1,6 @@
 package com.spoonofcode.exchangerates.core.ui.base
 
-import com.spoonofcode.exchangerates.core.navigation.VoyagerRouteResolver
+import com.spoonofcode.exchangerates.core.ui.navigation.route.VoyagerRouteResolver
 import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigator
 import dev.mokkery.MockMode
 import dev.mokkery.mock

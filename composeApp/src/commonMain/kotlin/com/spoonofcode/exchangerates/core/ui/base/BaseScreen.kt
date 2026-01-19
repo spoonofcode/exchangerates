@@ -24,10 +24,10 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.spoonofcode.exchangerates.core.ui.compose.ErrorView
 import com.spoonofcode.exchangerates.core.ui.compose.LoadingView
 import com.spoonofcode.exchangerates.core.ui.compose.Paddings
-import com.spoonofcode.exchangerates.core.ui.compose.Snackbar
+import com.spoonofcode.exchangerates.core.ui.compose.snackbar.Snackbar
 import com.spoonofcode.exchangerates.core.ui.compose.TopBar
 import com.spoonofcode.exchangerates.core.ui.compose.TopBarAction
-import com.spoonofcode.exchangerates.core.ui.compose.setSnackbarHostState
+import com.spoonofcode.exchangerates.core.ui.compose.snackbar.setSnackbarHostState
 import com.spoonofcode.exchangerates.core.ui.ext.addIf
 import com.spoonofcode.exchangerates.core.ui.ext.viewEnable
 import com.spoonofcode.exchangerates.core.ui.navigation.NavigationHandler

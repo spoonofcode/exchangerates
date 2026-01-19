@@ -1,4 +1,4 @@
-package com.spoonofcode.exchangerates.core.navigation
+package com.spoonofcode.exchangerates.core.ui.navigation.route
 
 import com.spoonofcode.exchangerates.navigation.Screen
 

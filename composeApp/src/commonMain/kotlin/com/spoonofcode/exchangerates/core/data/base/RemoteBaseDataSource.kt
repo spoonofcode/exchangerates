@@ -1,5 +1,6 @@
 package com.spoonofcode.exchangerates.core.data.base
 
+import com.spoonofcode.exchangerates.core.coroutines.DispatcherProvider
 import com.spoonofcode.exchangerates.core.network.HttpStatusCodes
 import com.spoonofcode.exchangerates.core.network.NetworkConfig
 import io.ktor.client.HttpClient

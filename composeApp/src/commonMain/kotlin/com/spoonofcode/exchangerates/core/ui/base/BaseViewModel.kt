@@ -2,10 +2,10 @@ package com.spoonofcode.exchangerates.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.spoonofcode.exchangerates.core.navigation.VoyagerRouteResolver
+import com.spoonofcode.exchangerates.core.ui.navigation.route.VoyagerRouteResolver
 import com.spoonofcode.exchangerates.core.network.NetworkManager
 import com.spoonofcode.exchangerates.core.ui.navigation.ViewModelNavigator
-import com.spoonofcode.exchangerates.core.ui.snackbar.SnackbarEvent
+import com.spoonofcode.exchangerates.core.ui.compose.snackbar.SnackbarEvent
 import dev.jordond.connectivity.Connectivity
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow

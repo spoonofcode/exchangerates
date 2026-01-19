@@ -1,8 +1,8 @@
-package com.spoonofcode.exchangerates.core.ui.ext
+package com.spoonofcode.exchangerates.core.ui.compose.snackbar.ext
 
 import androidx.compose.material3.SnackbarHostState
-import com.spoonofcode.exchangerates.core.ui.compose.CustomSnackbarVisuals
-import com.spoonofcode.exchangerates.core.ui.snackbar.SnackbarEvent
+import com.spoonofcode.exchangerates.core.ui.compose.snackbar.CustomSnackbarVisuals
+import com.spoonofcode.exchangerates.core.ui.compose.snackbar.SnackbarEvent
 
 suspend fun SnackbarHostState.showSnackbar(
     snackbarEvent: SnackbarEvent,
